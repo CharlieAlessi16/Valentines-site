@@ -180,12 +180,21 @@
 
   const noTexts = ["Really", "Are you Sure?", "Absolutely Positive", "100% Certainty"];
   let textIndex = 0;
-  let scale = 1;
+
+  let yesScale = 1;
+  let noScale = 1;
 
   noBtn.addEventListener("click", () => {
-    scale += 0.15;
-    yesBtn.style.transform = `scale(${scale})`;
+    // grow YES
+    yesScale += 0.15;
+    yesBtn.style.transform = `scale(${yesScale})`;
 
+    // shrink NO
+    noScale -= 0.1;
+    if (noScale < 0.4) noScale = 0.4;
+    noBtn.style.transform = `scale(${noScale})`;
+
+    // change NO text
     noBtn.textContent = noTexts[textIndex];
     textIndex = (textIndex + 1) % noTexts.length;
   });
